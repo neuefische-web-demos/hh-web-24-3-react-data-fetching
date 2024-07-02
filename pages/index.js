@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function HomePage() {
   const [joke, setJoke] = useState();
@@ -6,9 +6,7 @@ export default function HomePage() {
 
   useEffect(() => {
     async function startFetching() {
-      const response = await fetch(
-        `https://example-apis.vercel.app/api/bad-jokes/${id}`
-      );
+      const response = await fetch(`https://example-apis.vercel.app/api/bad-jokes/${id}`);
       const joke = await response.json();
 
       setJoke(joke);
@@ -17,16 +15,16 @@ export default function HomePage() {
     startFetching();
   }, [id]);
 
+  if (!joke) {
+    return <h1>Loading...</h1>;
+  }
+
   function handlePrevJoke() {
     setId(joke.prevId);
   }
 
   function handleNextJoke() {
     setId(joke.nextId);
-  }
-
-  if (!joke) {
-    return <h1>Loading...</h1>;
   }
 
   return (
